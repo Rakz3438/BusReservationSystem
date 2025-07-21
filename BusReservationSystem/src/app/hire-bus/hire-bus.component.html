@@ -1,0 +1,173 @@
+<div class="container" style="padding-left: 400px;">
+<form [formGroup]="searchRentalBus" (ngSubmit)="onSubmit()" >
+    <div class="row row-space">
+
+    <label for ="PickupPoint" style="text-align: center;"><h1>Pick Up Point</h1></label><br><br>
+    <select name="Text" id="PickupPoint" formControlName="PickupPoint" placeholder="Enter Pick Up Point" required><br>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Vishakapatnam">Vishakapatnam</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Bangalore">Bangalore</option>
+    </select><br><br>
+    <div class="p-t-30">
+        <button  (click)="onSubmit()" style="width:200px; color: black;"  class="btn btn--radius btn--green" type="submit" >Search Bus for Rental</button>
+  
+    </div>
+
+</div>
+</form>
+</div>
+
+
+
+<div class="container" style="padding-left: 400px; padding-top: 50px; padding-bottom: 50px;">
+    <div class="card">
+      
+        <div class="card-body">
+          
+          <div class="table-responsive">
+            <table class="table table-hover">
+                <thead style="background-color: #226670; color: white;">
+                    <tr>
+                        <th class="text-center"><span>Pickup Point</span></th>                               
+
+                        <th class="text-center"><span>No Of Seats</span></th>  
+                        <th class="text-center"><span>FarePerDay</span></th>
+                        <th class="text-center"><span>Deposit</span></th>
+
+                        <th class="text-center"><span>Drivers Name</span></th>
+                        <th class="text-center"><span>Drivers Contact No</span></th>
+                        <th class="text-center"><span>Select</span></th>    
+    
+                                                                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let bus of rentalBuses">
+                        <td class="text-center">
+                            
+                            <span class="user-subhead">{{bus.PickupPoint}}</span> <br>
+                           
+                        </td>
+                        <td class="text-center">
+                            <span class="label label-default">{{bus.NoOfSeats}}</span>
+                            
+                        </td>
+                        <td class="text-center">
+                            <span class="label label-default">{{bus.FarePerDay}}</span>
+                        </td>
+                       
+                        <td class="text-center">
+                            <span class="label label-default">{{bus.Deposit}}</span>
+                           
+                        </td>
+                        <td class="text-center">
+                            <span class="label label-default">{{bus.DriversName}}</span>
+                           
+                        </td>
+                        <td class="text-center">
+                            <span class="label label-default">{{bus.DriversContactNo}}</span>
+                           
+                        </td> 
+
+                        <td>
+                            <button style="width:150px; color: black;" data-toggle="collapse" data-target="#reantalbus" aria-expanded="false" aria-controls="reantalbus"  class="btn btn--radius btn--green" type="button" >Proceed Booking</button>
+
+                        </td>
+                       
+                    </tr>
+                     
+                </tbody>
+                
+                    
+
+                
+            </table>
+            
+        </div>
+
+    </div>
+</div>
+
+</div> 
+
+
+<div class="page-wrapper bg-red p-t-180 p-b-100 font-robo collapse" id="reantalbus">
+    <div class="wrapper wrapper--w960">
+        <div class="card card-2">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <h2 class="title">Book Your Bus Here</h2>
+                <form [formGroup]="RentalBusBooking" (ngSubmit)="onBooking()" novalidate>
+                    
+                    <div class="row row-space">
+                        <div class="input-group">
+                            <label for="StartDate" class="input--style-2"> Start Date</label>
+                            <input id="StartDate" formControlName="StartDate" class="input--style-2" type="date" placeholder="Enter StartDate" name="StartDate">
+                        </div>
+                        <div class="validcheck" *ngIf="!StartDate?.valid && (StartDate?.dirty || StartDate?.touched)">
+                            <div  class="em" [hidden]="!StartDate.errors.required">StartDate is required</div>
+                            
+                        </div>
+                       </div> 
+
+
+                       <div class="row row-space">
+                        <div class="input-group">
+                            <label for="EndDate" class="input--style-2">  End Date</label>
+                            <input id="EndDate" formControlName="EndDate" class="input--style-2" type="date" placeholder="Enter EndDate" name="EndDate">
+                        </div>
+                        <div class="validcheck" *ngIf="!EndDate?.valid && (StartDate?.dirty || EndDate?.touched)">
+                            <div  class="em" [hidden]="!EndDate.errors.required">EndDate is required</div>
+                            
+                        </div>
+                       </div>
+                        
+                    
+                
+
+
+                       <label for="driver"> Need Of Driver</label><br>
+
+
+            <div>
+
+              <input id="yes" type="radio" value=0 name="driver" formControlName="driver">
+
+              <label for="yes">Yes</label>
+
+           </div>
+
+  
+
+           <div>
+
+              <input id="no" type="radio" value=1 name="driver" formControlName="driver">
+
+              <label for="no">No</label>
+
+           </div>
+
+              
+
+            <div *ngIf="f.driver.touched && f.driver.invalid" class="alert alert-danger">
+
+                <div *ngIf="f.driver.errors.required">Driver requirement is required.</div>
+            </div>
+
+                        <div class="p-t-30">
+                        <button  (click)="onSubmit()" style="width:150px; color: black;"  class="btn btn--radius btn--green" type="submit" >Hire Bus</button>
+
+
+                       
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
